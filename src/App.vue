@@ -1,48 +1,16 @@
 <template>
   <div id="app">
-    @{{ user.username }} - {{ fullName }}
-    <strong>Followers: </strong> {{ followers }}
-    <button @click="followUser">Follow</button>
+    <UserProfiles/>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+
+import UserProfiles from "./components/UserProfiles.vue";
 
 export default {
-  name: 'App',
-  data() {
-    return {
-      followers: 0,
-      user: {
-        id: 1,
-        username: '_MichellRomney',
-        firstName: "Michell",
-        lastName: 'Rooney',
-        email: 'michellromney@theearthissquare.com',
-        isAdmin: true
-      },
-    }
-  },
-  watch: {
-    followers(newFollowerCount, oldFollowerCount) {
-      if (oldFollowerCount < newFollowerCount) {
-        console.log(`${this.user.username} has gained a follower!`)
-      }
-    }
-  },
-  computed: {
-    fullName() {
-      return `${this.user.firstName} ${this.user.lastName}`
-    }
-  },
-  methods: {
-    followUser() {
-      ++this.followers
-    }
-  },
-  mounted() {
-    this.followUser()
-  },
+  name      : 'app',
+  components: {UserProfiles}
 }
 </script>
 
@@ -52,8 +20,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+  min-height: 100 hv;
+  background-color: #F3F5FA
 }
 </style>
