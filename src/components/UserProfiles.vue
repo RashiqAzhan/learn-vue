@@ -9,6 +9,10 @@
       <div class="user_profile__follower-count">
         <strong>Followers: </strong> {{ followers }}
       </div>
+      <form class="user-profile__create-twoot">
+        <label for="newTwoot"><strong>New Twoot</strong></label>
+        <textarea name="" id="newTwoot" rows="4"></textarea>
+      </form>
     </div>
     <div class="user-profile__twoots-wrapper">
       <TwootItem v-for="twoot in user.twoots"
