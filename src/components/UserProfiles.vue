@@ -109,4 +109,10 @@ h1 {
   grid-gap: 10px;
   margin-bottom: auto;
 }
+
+.user-profile__create-twoot {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
 </style>
