@@ -2,7 +2,8 @@
   <div class="user-profile">
     <div class="user-profile__user_panel">
       <h1 class="user-profile__username">0{{ user.username }}</h1>
-      <div class="user-profile__admin-badge" v-if="user.isAdmin">
+      <div v-if="user.isAdmin"
+           class="user-profile__admin-badge">
         Admin
       </div>
       <div class="user_profile__follower-count">
@@ -10,7 +11,10 @@
       </div>
     </div>
     <div class="user-profile__twoots-wrapper">
-      <TwootItem v-for="twoot in user.twoots" :key="twoot.id" :username="user.username" :twoot="twoot"
+      <TwootItem v-for="twoot in user.twoots"
+                 :key="twoot.id"
+                 :twoot="twoot"
+                 :username="user.username"
                  @favorite="toggleFavourite"/>
     </div>
   </div>
