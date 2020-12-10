@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     favouriteTwoot(id) {
-      this.$emit('favorite', id);
+      this.$emit("favorite", id);
     }
   }
 }
