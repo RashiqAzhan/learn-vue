@@ -1,26 +1,26 @@
 <template>
-  <div id="app">
+  <div id = "app">
     <UserProfiles/>
   </div>
 </template>
 
-<script lang="ts">
+<script lang = "ts">
 
 import UserProfiles from "./components/UserProfiles.vue";
 
 export default {
   name      : "app",
-  components: {UserProfiles}
+  components: {UserProfiles},
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  min-height: 100 hv;
-  background-color: #F3F5FA
+  background-color        : #f3f5fa;
+  color                   : #2c3e50;
+  font-family             : Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing  : antialiased;
+  min-height              : 100 hv;
+  -moz-osx-font-smoothing : grayscale;
 }
 </style>
