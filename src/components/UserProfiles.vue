@@ -9,9 +9,25 @@
       <div class="user_profile__follower-count">
         <strong>Followers: </strong> {{ followers }}
       </div>
-      <form class="user-profile__create-twoot">
+      <form class="user-profile__create-twoot"
+            @submit.prevent="createNewTwoot">
         <label for="newTwoot"><strong>New Twoot</strong></label>
-        <textarea name="" id="newTwoot" rows="4"></textarea>
+        <textarea id="newTwoot" v-model="newTwootContent" name=""
+                  rows="4"></textarea>
+
+        <div class="user-profile__create-twoot-type">
+          <label for="newTwootType"><strong>Type: </strong></label>
+          <select id="newTwootType" v-model="selectedTwootType"
+                  name="">
+            <option
+                v-for="(option, index) in twootTypes"
+                :key="index"
+                :value="option.value">
+              {{ option.name }}
+            </option>
+          </select>
+        </div>
+        <button>Twoot</button>
       </form>
     </div>
     <div class="user-profile__twoots-wrapper">
@@ -32,19 +48,26 @@ export default {
   components: {TwootItem},
   data() {
     return {
-      followers: 0,
-      user     : {
+      followers        : 0,
+      user             : {
         id       : 1,
-        username : '_MichellRomney',
+        username : "_MichellRomney",
         firstName: "Michell",
-        lastName : 'Rooney',
-        email    : 'michellromney@theearthissquare.com',
+        lastName : "Rooney",
+        email    : "michellromney@theearthissquare.com",
         isAdmin  : true,
         twoots   : [
           {id: 1, content: "Twoots are awesome."},
           {id: 2, content: "Subscribe to the Earth is square."},
         ],
       },
+      twootTypes       : [
+        {value: "draft", name: "Draft"},
+        {value: "instant", name: "Instant Twoot"}
+      ],
+      newTwootContent  : "",
+      selectedTwootType: "instant",
+
     }
   },
   watch     : {
@@ -65,7 +88,15 @@ export default {
     },
     toggleFavourite(id) {
       console.log(`Favourited Tweet #${id}`);
-    }
+    },
+    createNewTwoot() {
+      if (this.newTwootContent && this.selectedTwootType !== "draft") {
+        this.user.twoots.unshift({
+          id: this.user.twoots.length + 1, content: this.newTwootContent,
+        })
+        this.newTwootContent = "";
+      }
+    },
   },
   mounted() {
     this.followUser()
