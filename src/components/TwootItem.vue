@@ -25,10 +25,10 @@ export default {
       this.$emit("favorite", id);
     },
   },
-}
+};
 </script>
 
-<style scoped>
+<style lang = "scss" scoped>
 .twoot-item {
   background-color : 5px;
   border           : 1px solid #dfe3e8;
@@ -37,13 +37,14 @@ export default {
   cursor           : pointer;
   padding          : 20px;
   transition       : all 0.25s ease;
+
+  .twoot-item:hover {
+    transform : scale(1.1, 1.1);
+  }
+
+  .twoot-item__user {
+    font-weight : bold;
+  }
 }
 
-.twoot-item:hover {
-  transform : scale(1.1, 1.1);
-}
-
-.twoot-item__user {
-  font-weight : bold;
-}
 </style>

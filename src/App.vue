@@ -11,10 +11,10 @@ import UserProfiles from "./components/UserProfiles.vue";
 export default {
   name      : "app",
   components: {UserProfiles},
-}
+};
 </script>
 
-<style>
+<style lang = "scss">
 #app {
   background-color        : #f3f5fa;
   color                   : #2c3e50;

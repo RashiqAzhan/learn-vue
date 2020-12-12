@@ -68,23 +68,23 @@ export default {
       newTwootContent  : "",
       selectedTwootType: "instant",
 
-    }
+    };
   },
   watch     : {
     followers(newFollowerCount, oldFollowerCount) {
       if (oldFollowerCount < newFollowerCount) {
-        console.log(`${this.user.username} has gained a follower!`)
+        console.log(`${this.user.username} has gained a follower!`);
       }
     },
   },
   computed  : {
     fullName() {
-      return `${this.user.firstName} ${this.user.lastName}`
+      return `${this.user.firstName} ${this.user.lastName}`;
     },
   },
   methods   : {
     followUser() {
-      ++this.followers
+      ++this.followers;
     },
     toggleFavourite(id) {
       console.log(`Favourited Tweet #${id}`);
@@ -93,57 +93,58 @@ export default {
       if (this.newTwootContent && this.selectedTwootType !== "draft") {
         this.user.twoots.unshift({
           id: this.user.twoots.length + 1, content: this.newTwootContent,
-        })
+        });
         this.newTwootContent = "";
       }
     },
   },
   mounted() {
-    this.followUser()
+    this.followUser();
   },
-}
+};
 </script>
 
-<style scoped>
+<style lang = "scss" scoped>
 .user-profile {
   display               : grid;
   grid-template-columns : 1fr 3fr;
   padding               : 50px 5%;
   width                 : 100%;
+
+  .user-profile__user_panel {
+    background-color : white;
+    border           : 1px solid #dfe3e8;
+    border-radius    : 5px;
+    display          : flex;
+    flex-direction   : column;
+    margin-right     : 50px;
+    padding          : 20px;
+
+    h1 {
+      margin : 0;
+    }
+
+    .user-profile__admin-badge {
+      background    : rebeccapurple;
+      border-radius : 5px;
+      color         : white;
+      font-weight   : bold;
+      margin-right  : auto;
+      padding       : 0 10px;
+    }
+
+    .user-profile__twoots-wrapper {
+      display       : grid;
+      grid-gap      : 10px;
+      margin-bottom : auto;
+    }
+  }
+
+  .user-profile__create-twoot {
+    display        : flex;
+    flex-direction : column;
+    padding-top    : 20px;
+  }
 }
 
-.user-profile__user_panel {
-  background-color : white;
-  border           : 1px solid #dfe3e8;
-  border-radius    : 5px;
-  display          : flex;
-  flex-direction   : column;
-  margin-right     : 50px;
-  padding          : 20px;
-}
-
-h1 {
-  margin : 0;
-}
-
-.user-profile__admin-badge {
-  background    : rebeccapurple;
-  border-radius : 5px;
-  color         : white;
-  font-weight   : bold
-  margin-right  : auto;
-  padding       : 0 10px;
-}
-
-.user-profile__twoots-wrapper {
-  display       : grid;
-  grid-gap      : 10px;
-  margin-bottom : auto;
-}
-
-.user-profile__create-twoot {
-  display        : flex;
-  flex-direction : column;
-  padding-top    : 20px;
-}
 </style>
