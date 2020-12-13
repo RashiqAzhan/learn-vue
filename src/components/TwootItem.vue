@@ -38,7 +38,7 @@ export default {
   padding          : 20px;
   transition       : all 0.25s ease;
 
-  .twoot-item:hover {
+  &:hover {
     transform : scale(1.1, 1.1);
   }
 
