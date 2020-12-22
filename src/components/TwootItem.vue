@@ -9,8 +9,8 @@
 
 <script lang = "ts">
 export default {
-  name   : "TwootItem",
-  props  : {
+  name : "TwootItem",
+  props: {
     username: {
       type    : String,
       required: true,

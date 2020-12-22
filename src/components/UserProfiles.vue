@@ -2,55 +2,39 @@
   <div class = "user-profile">
     <div class = "user-profile__user_panel">
       <h1 class = "user-profile__username">0{{ user.username }}</h1>
-      <div v-if = "user.isAdmin"
-           class = "user-profile__admin-badge">
+      <div
+          v-if = "user.isAdmin"
+          class = "user-profile__admin-badge">
         Admin
       </div>
       <div class = "user_profile__follower-count">
         <strong>Followers: </strong> {{ followers }}
       </div>
-      <form :class = "{'--exceeded':newTwootCharacterCount>180}"
-            class = "user-profile__create-twoot"
-            @submit.prevent = "createNewTwoot">
-        <label for = "newTwoot"><strong>New Twoot</strong>
-          {{ newTwootCharacterCount }}/180</label>
-        <textarea id = "newTwoot" v-model = "newTwootContent" name = ""
-                  rows = "4"></textarea>
 
-        <div class = "user-profile__create-twoot-type">
-          <label for = "newTwootType"><strong>Type: </strong></label>
-          <select id = "newTwootType" v-model = "selectedTwootType"
-                  name = "">
-            <option
-                v-for = "(option, index) in twootTypes"
-                :key = "index"
-                :value = "option.value">
-              {{ option.name }}
-            </option>
-          </select>
-        </div>
-        <button>Twoot</button>
-      </form>
+      <CreateTwootPanel @add-twoot = "addTwoot"/>
     </div>
+
     <div class = "user-profile__twoots-wrapper">
-      <TwootItem v-for = "twoot in user.twoots"
-                 :key = "twoot.id"
-                 :twoot = "twoot"
-                 :username = "user.username"/>
+      <TwootItem
+          v-for = "twoot in user.twoots"
+          :key = "twoot.id"
+          :twoot = "twoot"
+          :username = "user.username"/>
     </div>
   </div>
 </template>
 
 <script lang = "ts">
-import TwootItem from "./TwootItem.vue";
+import CreateTwootPanel from "./CreateTwootPanel.vue";
+import TwootItem        from "./TwootItem.vue";
 
 export default {
   name      : "UserProfiles",
-  components: {TwootItem},
+  components: {TwootItem, CreateTwootPanel},
   data() {
     return {
-      followers        : 0,
-      user             : {
+      followers: 0,
+      user     : {
         id       : 1,
         username : "_MichellRomney",
         firstName: "Michell",
@@ -62,31 +46,11 @@ export default {
           {id: 2, content: "Subscribe to the Earth is square."},
         ],
       },
-      twootTypes       : [
-        {value: "draft", name: "Draft"},
-        {value: "instant", name: "Instant Twoot"},
-      ],
-      newTwootContent  : "",
-      selectedTwootType: "instant",
-
     };
   },
-  computed  : {
-    fullName() {
-      return `${this.user.firstName} ${this.user.lastName}`;
-    },
-    newTwootCharacterCount() {
-      return this.newTwootContent.length;
-    },
-  },
   methods   : {
-    createNewTwoot() {
-      if (this.newTwootContent && this.selectedTwootType !== "draft") {
-        this.user.twoots.unshift({
-          id: this.user.twoots.length + 1, content: this.newTwootContent,
-        });
-        this.newTwootContent = "";
-      }
+    addTwoot(twoot) {
+      this.user.twoots.unshift({id: this.user.twoots.length + 1, content: twoot});
     },
   },
 };
