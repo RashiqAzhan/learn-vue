@@ -36,8 +36,7 @@
       <TwootItem v-for = "twoot in user.twoots"
                  :key = "twoot.id"
                  :twoot = "twoot"
-                 :username = "user.username"
-                 @favorite = "toggleFavourite"/>
+                 :username = "user.username"/>
     </div>
   </div>
 </template>
@@ -72,13 +71,6 @@ export default {
 
     };
   },
-  watch     : {
-    followers(newFollowerCount, oldFollowerCount) {
-      if (oldFollowerCount < newFollowerCount) {
-        console.log(`${this.user.username} has gained a follower!`);
-      }
-    },
-  },
   computed  : {
     fullName() {
       return `${this.user.firstName} ${this.user.lastName}`;
@@ -88,12 +80,6 @@ export default {
     },
   },
   methods   : {
-    followUser() {
-      ++this.followers;
-    },
-    toggleFavourite(id) {
-      console.log(`Favourited Tweet #${id}`);
-    },
     createNewTwoot() {
       if (this.newTwootContent && this.selectedTwootType !== "draft") {
         this.user.twoots.unshift({
@@ -102,9 +88,6 @@ export default {
         this.newTwootContent = "";
       }
     },
-  },
-  mounted() {
-    this.followUser();
   },
 };
 </script>
