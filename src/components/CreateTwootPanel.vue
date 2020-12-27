@@ -30,11 +30,11 @@
 </template>
 
 <script lang = "ts">
-import {reactive, computed} from "vue";
+import {computed, reactive} from "vue";
 
 export default {
-  name    : "NewTwootPanel",
-  setup() {
+  name: "NewTwootPanel",
+  setup(props, ctx) {
     const state = reactive({
           newTwootContent  : "",
           selectedTwootType: "instant",
@@ -45,23 +45,20 @@ export default {
         },
     );
 
+    const newTwootCharacterCount = computed(() => state.newTwootContent.length);
+
+    function createNewTwoot() {
+      if (state.newTwootContent && state.selectedTwootType !== "draft") {
+        ctx.emit("add-twoot", state.newTwootContent);
+        state.newTwootContent = "";
+      }
+    }
+
     return {
       state,
+      newTwootCharacterCount,
+      createNewTwoot,
     };
-  },
-
-  computed: {
-    newTwootCharacterCount() {
-      return this.newTwootContent.length;
-    },
-  },
-  methods : {
-    createNewTwoot() {
-      if (this.newTwootContent && this.selectedTwootType !== "draft") {
-        this.$emit("add-twoot", this.newTwootContent);
-        this.newTwootContent = "";
-      }
-    },
   },
 };
 
