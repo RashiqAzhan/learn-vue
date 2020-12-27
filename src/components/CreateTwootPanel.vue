@@ -6,7 +6,7 @@
     <label for = "newTwoot"><strong>New Twoot</strong> ({{ newTwootCharacterCount }}/180)</label>
     <textarea
         id = "newTwoot"
-        v-model = "newTwootContent"
+        v-model = "state.newTwootContent"
         rows = "4"/>
 
     <div class = "create-twoot-panel__submit">
@@ -14,9 +14,9 @@
         <label for = "newTwootType"><strong>Type: </strong></label>
         <select
             id = "newTwootType"
-            v-model = "selectedTwootType">
+            v-model = "state.selectedTwootType">
           <option
-              v-for = "(option, index) in twootTypes"
+              v-for = "(option, index) in state.twootTypes"
               :key = "index"
               :value = "option.value">
             {{ option.name }}
@@ -30,18 +30,26 @@
 </template>
 
 <script lang = "ts">
+import {reactive, computed} from "vue";
+
 export default {
   name    : "NewTwootPanel",
-  data() {
+  setup() {
+    const state = reactive({
+          newTwootContent  : "",
+          selectedTwootType: "instant",
+          twootTypes       : [
+            {value: "draft", name: "Draft"},
+            {value: "instant", name: "Instant Twoot"},
+          ],
+        },
+    );
+
     return {
-      newTwootContent  : "",
-      selectedTwootType: "instant",
-      twootTypes       : [
-        {value: "draft", name: "Draft"},
-        {value: "instant", name: "Instant Twoot"},
-      ],
+      state,
     };
   },
+
   computed: {
     newTwootCharacterCount() {
       return this.newTwootContent.length;
