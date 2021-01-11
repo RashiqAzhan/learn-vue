@@ -1,5 +1,8 @@
 # learn-vue
 
+## Description
+Currently in development. Take a look around the code. Screenshots and demo will be added as soon as it is complete.
+
 ## Project setup
 ```
 npm install
